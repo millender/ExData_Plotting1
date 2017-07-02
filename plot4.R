@@ -1,7 +1,7 @@
 library(data.table)
 
 #load the data
-data <- fread("/home/user/data/household_power_consumption.txt", na.strings = "?")
+data <- fread("household_power_consumption.txt", na.strings = "?")
 
 #make col names easier to work with
 colnames(data) <- tolower(gsub("_",".",colnames(data)))
