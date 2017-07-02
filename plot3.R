@@ -16,12 +16,16 @@ setcolorder(data, c(10,3:9,1:2))
 xdata <- as.xts.data.table(data[, !c("date", "time"), with=F])
 
 #subset to the time period we are examining
-xdata <- xdata["2007-02-01/2007-02-03 00:01:00"]
+xdata <- xdata["2007-02-01 00:01:00/2007-02-03 00:00:00"]
 
 #generate plot 3
-plot(xdata$sub.metering.1,
-     ylab = "Energy sub metering", main="",
-     major.ticks = "days", major.format = "%a")
+png("plot3.png")
+
+plot(xdata$sub.metering.1, main="",
+     xaxt="n", major.ticks = "days", major.format = "%a")
+axis(1, at=as.POSIXct(c("2007-02-01", "2007-02-02", "2007-02-03")),
+     labels = c("Thu", "Fri", "Sat"))
+
 lines(xdata$sub.metering.2,
      col = "red")
 lines(xdata$sub.metering.3,
@@ -29,3 +33,5 @@ lines(xdata$sub.metering.3,
 legend("topright",
        lty = 1, col = c("black", "red", "blue"),
        legend = c("Sub_metering_1", "Sub_metering_2", "Sub_metering_3"))
+
+dev.off()

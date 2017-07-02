@@ -16,12 +16,14 @@ setcolorder(data, c(10,3:9,1:2))
 xdata <- as.xts.data.table(data[, !c("date", "time"), with=F])
 
 #subset to the time period we are examining
-xdata <- xdata["2007-02-01/2007-02-03 00:01:00"]
+xdata <- xdata["2007-02-01 00:01:00/2007-02-03 00:00:00"]
 
 #set up panels
 par(mfrow = c(2, 2), mar=c(4, 4, 2, 1))
 
 #generate plot 4
+png("plot4.png")
+
 plot(xdata$global.active.power, main = "",
      ylab = "Global Active Power",
      major.ticks = "days", major.format = "%a")
@@ -45,3 +47,5 @@ plot(xdata$global.reactive.power, main = "",
      ylab = "Global_reactive_power",
      xlab = "datetime",
      major.ticks = "days", major.format = "%a")
+
+dev.off()

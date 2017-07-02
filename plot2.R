@@ -16,10 +16,11 @@ setcolorder(data, c(10,3:9,1:2))
 xdata <- as.xts.data.table(data[, !c("date", "time"), with=F])
 
 #subset to the time period we are examining
-xdata <- xdata["2007-02-01/2007-02-03 00:01:00"]
+xdata <- xdata["2007-02-01 00:01:00/2007-02-03 00:00:00"]
 
 #generate plot 2
-plot(xdata$global.active.power,
+png("plot2.png")
+plot(xdata$global.active.power,  main="",
      ylab = "Global Active Power (kilowatts)",
      major.ticks = "days", major.format = "%a")
-
+dev.off()
